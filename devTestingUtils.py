@@ -33,4 +33,4 @@ if argv[0] == "--help":
     print('     --setup {"steamDir": "", "modDirName": ""} setup the tools with the steam folder and/or mod name folder.')
     print('     compile {"modname": "", "light":""}compiles the mod to a modname.cmod file, modname is used to specify a mod, light is used to compile only the files in the maps folder.')
     print('     install {"file": ""} install a mod.')
-    print("     ")
+    print("\n\nTools By ENDERZOMBI102")
