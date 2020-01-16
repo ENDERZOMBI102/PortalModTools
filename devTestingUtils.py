@@ -1,4 +1,4 @@
-from base64 import *
+from base65536 import encode
 from requests import get
 from config import *
 from json import *
@@ -16,7 +16,9 @@ try:
     mode = argv[1]
 except:
     print("No argumets inserted!")
-    exit(1)
+    #exit(1)
+    argv.append("compile")
+    argv.append("zipName=pft.zip")
 # strange workaround command line limitations
 
 
@@ -71,7 +73,7 @@ def compilee():
     print("    reading zip..")
     try:
         with open(config.load("steamDir") + "\steamapps\sourcemods\\" + config.load("modDirName") + "\\" + para["zipName"], "rb") as file:
-            cmod["modZipData"] = str(b64encode(file.read()))# open the zip file and encode it in base64
+            cmod["modZipData"] = str(encode(file.read()))# open the zip file and encode it in base64
         print("    loading mod info..")
         cmod["modName"] = static.modName()# load the mod name from the config and put it in the file
         cmod["folderName"] = config.load("modDirName")# loads the dir name and put it in the file
