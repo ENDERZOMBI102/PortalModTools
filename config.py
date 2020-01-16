@@ -6,7 +6,7 @@ class config():
         r"""
             this method reate a valid config file
         """
-        cfg='{"configType": "Portal 2 Modding Tools Config File","toolsVersion": "0","lastVersion": "false", "modGithubRepoUrl": "", "steamDir": "", "modName": "", "modDirName": ""}'
+        cfg='{"configType": "Portal 2 Modding Tools Config File","toolsVersion": "0","lastVersion": "true", "modGithubRepoUrl": "", "steamDir": "", "modName": "", "modDirName": ""}'
         with open('config.cfg', 'w', encoding="utf-8") as file:
             json.dump(json.loads(cfg), file, indent=3)
 	
@@ -61,12 +61,12 @@ class config():
             try:
                 with open('config.cfg', 'r') as file:# try to open the config file
                     cfg = json.load(file)  # load the config file
-                    if cfg['config_type'] == "Portal 2 Modding Tools Config File":
+                    if cfg['configType'] == "Portal 2 Modding Tools Config File":
                         # try all the possible configs
-                        x = cfg["steamDir"]
-                        x = cfg["modGithubRepoUrl"]
+                        x = cfg["toolsVersion"]
                         x = cfg["lastVersion"]
-                        x = cfg["toolVersion"]
+                        x = cfg["modGithubRepoUrl"]
+                        x = cfg["steamDir"]
                         x = cfg["modName"]
                         x = cfg["modDirName"]
                         return True # the check is made successfully
