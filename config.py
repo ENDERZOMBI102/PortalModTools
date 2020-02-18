@@ -6,7 +6,7 @@ class config():
         r"""
             this method reate a valid config file
         """
-        cfg='{"configType": "Portal 2 Modding Tools Config File","toolsVersion": "0","lastVersion": "true", "modGithubRepoUrl": "", "steamDir": "", "modName": "", "modDirName": ""}'
+        cfg='{"configType": "Portal 2 Modding Tools Config File","toolsVersion": "0","lastVersion": "true", "modGithubRepoUrl": "", "steamDir": "", "mods":{ }}'
         with open('config.cfg', 'w', encoding="utf-8") as file:
             json.dump(json.loads(cfg), file, indent=3)
 	
@@ -93,8 +93,11 @@ class static:
     def name():
         return "Portal 2 Modding Tools"
 
-    def modName():
-        return config.load("modName")
+    def createMod(modName = None, modDirName = None, authors = [None]):
+        mods = config.load("mods")
+        mods[modName][modDirName] = modDirName
+        mods[modName][authors] = authors
+
 
     def version():
         return config.load("toolsVersion")
