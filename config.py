@@ -6,7 +6,7 @@ class config():
         r"""
             this method reate a valid config file
         """
-        cfg='{"configType": "Portal 2 Modding Tools Config File","toolsVersion": "0","lastVersion": "true", "modGithubRepoUrl": "", "steamDir": "", "mods":{ }}'
+        cfg='{"configType": "Portal 2 Modding Tools Config File","toolsVersion": "0","lastVersion": "true", "steamDir": "", "mods":[]}'
         with open('config.cfg', 'w', encoding="utf-8") as file:
             json.dump(json.loads(cfg), file, indent=3)
 	
@@ -65,10 +65,8 @@ class config():
                         # try all the possible configs
                         x = cfg["toolsVersion"]
                         x = cfg["lastVersion"]
-                        x = cfg["modGithubRepoUrl"]
+                        x = cfg["mods"]
                         x = cfg["steamDir"]
-                        x = cfg["modName"]
-                        x = cfg["modDirName"]
                         return True # the check is made successfully
                     else:
                         raise configError # the config file is not a BM config file
@@ -97,7 +95,7 @@ class static:
         mods = config.load("mods")
         mods[modName][modDirName] = modDirName
         mods[modName][authors] = authors
-
+        config.save(mods, "mods")
 
     def version():
         return config.load("toolsVersion")
