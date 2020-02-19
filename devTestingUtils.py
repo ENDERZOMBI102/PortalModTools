@@ -69,27 +69,36 @@ def compilee():
         print("Compiling process aborted.\nReason: invalid or inesistent zip file")
         print(e)
         exit(1)
-    # zip encoding part
+    # read the zip file
     print("    reading zip..")
     try:
-        with open(config.load("steamDir") + "\steamapps\sourcemods\\" + config.load("modDirName") + "\\" + para["zipName"], "rb") as file:
-            cmod["modZipData"] = str(encode(file.read()))# open the zip file and encode it in base64
-        print("    loading mod info..")
-        cmod["modName"] = static.modName()# load the mod name from the config and put it in the file
-        cmod["folderName"] = config.load("modDirName")# loads the dir name and put it in the file
+        file = open(config.load("steamDir") + "\steamapps\sourcemods\\" + config.load("modDirName") + "\\" + para["zipName"], "rb")
+        print("    zip readed!")
     except Exception as e:
-        print("compiling failed")
+        print("compiling failed!\n invalid or nonexistant file!")
         print(e)
         exit(1)
+    # encode the zip file
     try:
-        print("    saving file..")
-        with open(static.modName()+".cmod", 'w', encoding="utf-8") as file:
-                dump(cmod, file, indent=3)# save the file
-        print("compiled successfully!")
+        print("    encoding zip file..")
+        data = encode(file)
+        file.close()
     except Exception as e:
-        print("compiling failed")
+        print("compiling failed!\nCan't encode zip file to base65536!")
+        print(e)
+        file.close()
+        exit(1)
+    # write the data to a cmod file
+    try:
+        print("compiled successfully! saving..")
+        with open(static.modName()+".cmod", 'w', encoding="utf-8") as file:
+                file.writelines(data)
+        print("saved successfully!")
+    except Exception as e:
+        print("failed to save the file!")
         print(e)
         exit(1)
+    print("\nAll steps done! closing..")
     exit(0)# normal program exit
 
 
